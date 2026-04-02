@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
  * 7. Używając instrukcji do…while() napisz program PierwiastekDo, który będzie
@@ -8,14 +9,18 @@ import java.util.Scanner;
 public class PierwiastekDo {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-//        boolean blad;
-//        try {
-//          blad = false;
-        double liczba;
+        double liczba = 0;
+        Boolean bylBlad;
         do {
+            bylBlad = false;
             System.out.print("Proszę podać liczbę do pierwiastkowania: ");
-            liczba = scanner.nextInt();
-        }while(liczba < 0);
+            try {
+                liczba = scanner.nextInt();
+            }catch(InputMismatchException e){
+                scanner.nextLine();
+                bylBlad = true;
+            }
+        }while(liczba < 0 || bylBlad);
         double perwiastek = Math.sqrt(liczba);
         System.out.println("perwiastek = " + perwiastek);
 //        }
